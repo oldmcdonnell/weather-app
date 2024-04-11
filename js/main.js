@@ -1,5 +1,5 @@
 import axios from "axios"
-const zipInput = document.getElementById("zipInput2");
+const zipInput = document.getElementById("zipInput");
 const submit = document.getElementById("submit")
 let currentCity = document.getElementById("city")
 let currentTempK = document.getElementById("temperaturek")

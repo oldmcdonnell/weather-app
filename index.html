@@ -15,18 +15,41 @@
       <h1>Weather App!</h1>
     </div>
     <!--enter info get button 2 divs-->
-  <!-- <form id = zipInput> -->
-      <input type="number" id= "zipInput2" placeholder="Zipcode" maxlength="5" min="0" required></div>
-      <p id="values"></p>
-      <input type="submit" value="submit" id="submit">
-    <!-- </form> -->
-    <!--City input city -->
-    <div id="city"></div>
+    <div class="contianer">
+      <div class="d-flex justify-content-center align-items-md-center">
+        <div class="d-flex justify-content-center align-items-right col-5 p-3 bg-light">
+          <input type="number" id= "zipInput" placeholder="Zipcode" class="inputStyle">
+        </div>
+        <div class="d-flex justify-content-left col-5 p-3 bg-light">
+          <input type="submit" value="submit" id="submit">
+        </div>
+      </div>
+    </div>
+        <!--City input city -->
+    <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center col-9 border border-dark bg-warning">City</div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div id="city" class="d-flex justify-content-center col-9 border p-4 border-dark"></div>
+    </div>
     <!-- temperature, 3 cells-->
-    <div id="temperaturek"></div>
-    <div id="temperaturec"></div>
-    <div id="temperaturef"></div>
+    <div class="contianer">
+      <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center col-9 border border-dark bg-warning">Temperature</div>
+      </div>
+      <div class="row justify-content-center align-items-md-center">
+        <div id="temperaturek" class="d-flex justify-content-center col-3 p-3 bg-light border border-dark">pl</div>
+        <div id="temperaturec" class="d-flex justify-content-center col-3 p-3 bg-light border border-dark">pl</div>
+        <div id="temperaturef" class="d-flex justify-content-center col-3 p-3 bg-light border border-dark">pl</div>
+      </div>
+    </div>
     <!-- Condition one cell-->
+    <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center col-9 border border-dark bg-warning">Condition</div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div id="condition" class="d-flex justify-content-center col-9 border p-4 border-dark"></div>
+    </div>
     <div id="condition"></div>
     <!--Other info image-->
     <img id="currenticon" src="">
