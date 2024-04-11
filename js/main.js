@@ -1,48 +1,63 @@
 import axios from "axios"
 const zipInput = document.getElementById("zipInput2");
 const submit = document.getElementById("submit")
-//zipInput.addEventListener("change", updateZip)
+let currentCity = document.getElementById("city")
+let currentTempK = document.getElementById("temperaturek")
+let currentTempC = document.getElementById("temperaturec")
+let currentTempF = document.getElementById("temperaturef")
+let currentCondition = document.getElementById("condition")
+let currentIcon = document.getElementById("currenticon")
+
 let zipCode = "40502"
 submit.addEventListener("click", updateZip)
+
+let selectedLocation = ""
 
 function updateZip() {
     //zipInput.value = e.target.value;
  console.log("submit")
  console.log(zipInput.value)
-getWeather(zipInput.value)
+    if(zipInput.value.length === 5){
+        zipCode = zipInput.value;
+    } else {
+        console.log("alert invlaid zipcode")
+    }
+getWeather(zipCode)
 }
 
 
-/*-
-if(zipInput.value.length === 5){
-    zipCode = zipInput.value;
-}
--*/
-
-//const zipCode = "40502"
-
-//const staticLink = `https://api.openweathermap.org/data/2.5/weather?zip=40502,us&appid=40bc842ca745787e7b42c27345fb9e4a`
-
-// ${zipCode}
-async function getWeatherFromAPI(zipCode) {
+async function getWeatherKelvin(zipCode) {
     const openWeatherLink = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=40bc842ca745787e7b42c27345fb9e4a`
     try {
         const response = await axios.get(openWeatherLink)
-        return response
-        // const weatherInfo = await response
-        // return weatherInfo
+        const weatherInfoK = await response
+        return weatherInfoK
         console.log("get success")
     } catch (error){
-        console.log('Error: ', error)
+        console.log('get From API Error: ', error)
         return []
     }
 }
 
 async function getWeather(zipCode) {
-    const weatherInfo = await getWeatherFromAPI(zipCode)
-    console.log('Weather ', weatherInfo)
-    console.log(weatherInfo.data.main.feels_like)
-    let currentTemp = weatherInfo.data.main.feels_like
+    const weatherInfoK = await getWeatherKelvin(zipCode)
+    console.log('Weather ', weatherInfoK)
+    console.log(weatherInfoK.data.main.feels_like)
+    let tempK = Math.ceil(weatherInfoK.data.main.feels_like)
+    let tempC = Math.ceil(tempK-273.15);
+    console.log(tempC)
+    let tempF = Math.ceil((tempK - 273.15) *1.8 + 32)
+    console.log(tempF)
+    currentTempK.textContent = tempK + " K" 
+    currentTempC.textContent = tempC + " C"
+    currentTempF.textContent = tempF + " F"
+    currentCity.textContent = weatherInfoK.data.name
+    console.log(weatherInfoK.data.weather[0].description)
+    currentCondition.textContent = weatherInfoK.data.weather[0].description
+    let tempIcon = weatherInfoK.data.weather[0].icon
+    currentIcon.src = `https://openweathermap.org/img/wn/${tempIcon}@2x.png`
+
+    // currentTemp.textContent=`${weatherInfoK.data.main.feels_like}`
 }
 
 //getWeather();
