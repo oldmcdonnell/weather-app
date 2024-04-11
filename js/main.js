@@ -1,9 +1,9 @@
 import axios from "axios"
 const zipInput = document.getElementById("zipInput2");
-const log = document.getElementById("submit")
+const submit = document.getElementById("submit")
 //zipInput.addEventListener("change", updateZip)
 let zipCode = "40502"
-log.addEventListener("click", updateZip)
+submit.addEventListener("click", updateZip)
 
 function updateZip() {
     //zipInput.value = e.target.value;
