@@ -7,6 +7,8 @@ let currentTempC = document.getElementById("temperaturec")
 let currentTempF = document.getElementById("temperaturef")
 let currentCondition = document.getElementById("condition")
 let currentIcon = document.getElementById("currenticon")
+let errorMessage = document.getElementById("warningText")
+let otherInfo = "d-flex justify-content-center col-9 border p-4 border-dark"
 
 let zipCode = "40502"
 submit.addEventListener("click", updateZip)
@@ -34,6 +36,12 @@ async function getWeatherKelvin(zipCode) {
         return weatherInfoK
         console.log("get success")
     } catch (error){
+        //currentIcon.src = ""
+        errorMessage.classList.remove("d-none")
+        currentIcon.classList.add("d-none")
+        //currentIcon.className = ""
+        errorMessage.textContent = "That Zipcode is not valid"
+        errorMessage.className = otherInfo
         console.log('get From API Error: ', error)
         return []
     }
@@ -53,8 +61,12 @@ async function getWeather(zipCode) {
     currentTempF.textContent = tempF + " F"
     currentCity.textContent = weatherInfoK.data.name
     console.log(weatherInfoK.data.weather[0].description)
+    errorMessage.textContent = ""
+    errorMessage.classList.add("d-none")
     currentCondition.textContent = weatherInfoK.data.weather[0].description
     let tempIcon = weatherInfoK.data.weather[0].icon
+    //currentIcon.className = otherInfo
+    currentIcon.classList.remove("d-none")
     currentIcon.src = `https://openweathermap.org/img/wn/${tempIcon}@2x.png`
 
     // currentTemp.textContent=`${weatherInfoK.data.main.feels_like}`
